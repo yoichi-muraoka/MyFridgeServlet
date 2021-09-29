@@ -1,6 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -41,12 +45,49 @@ public class IndexServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 文字化け防止
+		request.setCharacterEncoding("UTF-8");
 
 		// 入力値の取得
+		String name = request.getParameter("name");
+		String strExpDate = request.getParameter("expDate");
+		System.out.println(name);
+		System.out.println(strExpDate);
 
 		// バリデーション
+		boolean isValidated = true;
+
+		if(name.isBlank()) {
+			isValidated = false;
+			request.setAttribute("errorName", "アイテム名を入力してください");
+		}
+
+		// 賞味期限をDate型に変換
+		Date expDate = null;
+		if(strExpDate.isBlank()) {
+			// 日付が未入力の場合、7日後を賞味期限とする
+			var c = Calendar.getInstance();
+			c.add(Calendar.DATE, 7);
+			expDate = c.getTime();
+		}
+		else {
+			// <input type="date">から取得されるデータ形式に基づいて変換
+			var sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				expDate = sdf.parse(strExpDate);
+			} catch (ParseException e) {
+				isValidated = false;
+				request.setAttribute("errorExpDate", "日付の形式が正しくありません");
+				e.printStackTrace();
+			}
+		}
 
 		// アイテムの保存
+		if(isValidated) {
+			System.out.println("アイテムを保存");
+			System.out.println(expDate);
+			System.out.println(name);
+		}
+
 
 		// 画面表示
 		doGet(request, response);

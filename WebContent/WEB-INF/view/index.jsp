@@ -19,8 +19,15 @@
 <div class="container">
   <form action="" method="post">
     <div class="my-5">
+      <c:if test="${!empty errorName}">
+        <div class="alert alert-danger"><c:out value="${errorName}" /></div>
+      </c:if>
+      <c:if test="${!empty errorExpDate}">
+        <div class="alert alert-danger"><c:out value="${errorExpDate}" /></div>
+      </c:if>
+
       アイテム名: <input type="text" name="name" id="name" class="mr-4">
-      賞味期限: <input type="date" name="expDate" id="expDate" class="mr-5">
+      賞味期限: <input type="text" name="expDate" id="expDate" class="mr-5">
       <input class="btn btn-primary" type="submit" value="登録">
     </div>
   </form>
