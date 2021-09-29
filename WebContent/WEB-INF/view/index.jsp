@@ -26,8 +26,8 @@
   </form>
 
   <div class="my-5">
-    <a class="btn btn-success active" href="" >全アイテム</a>
-    <a class="btn btn-secondary" href="expired.html" >期限切れアイテム</a>
+    <a class="btn btn-success active" href="<%= request.getContextPath() %>/index" >全アイテム</a>
+    <a class="btn btn-secondary" href="<%= request.getContextPath() %>/index?sorted=expired" >期限切れアイテム</a>
   </div>
 
   <table class="table table-hover">
