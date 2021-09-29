@@ -25,9 +25,21 @@
     </div>
   </form>
 
+  <%-- GETパラメータに応じたa要素のクラス --%>
+  <c:choose>
+    <c:when test="${empty param.sorted}">
+      <c:set var="btn1" value="btn btn-success active" />
+      <c:set var="btn2" value="btn btn-secondary" />
+    </c:when>
+    <c:otherwise>
+      <c:set var="btn1" value="btn btn-secondary" />
+      <c:set var="btn2" value="btn btn-success active" />
+    </c:otherwise>
+  </c:choose>
+
   <div class="my-5">
-    <a class="btn btn-success active" href="<%= request.getContextPath() %>/index" >全アイテム</a>
-    <a class="btn btn-secondary" href="<%= request.getContextPath() %>/index?sorted=expired" >期限切れアイテム</a>
+    <a class="<c:out value="${btn1}" />" href="<%= request.getContextPath() %>/index" >全アイテム</a>
+    <a class="<c:out value="${btn2}" />" href="<%= request.getContextPath() %>/index?sorted=expired" >期限切れアイテム</a>
   </div>
 
   <table class="table table-hover">
