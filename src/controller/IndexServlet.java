@@ -20,9 +20,18 @@ import service.ItemServiceImpl;
 public class IndexServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// アイテムリストの取得
+		// GETパラメータの取得
+		String sorted = request.getParameter("sorted");
+
+		// GETパラメータに応じたアイテムリストの取得
 		ItemService service = new ItemServiceImpl();
-		List<Item> list = service.getItemList();
+		List<Item> list;
+		if(sorted == null) {
+			list = service.getItemList();
+		}
+		else {
+			list = service.getExpiredList();
+		}
 
 		// リクエストスコープへの格納とフォワード
 		request.setAttribute("list", list);
