@@ -83,9 +83,8 @@ public class IndexServlet extends HttpServlet {
 
 		// アイテムの保存
 		if(isValidated) {
-			System.out.println("アイテムを保存");
-			System.out.println(expDate);
-			System.out.println(name);
+			var sdf = new SimpleDateFormat("yyyy年MM月dd日(E)");
+			request.setAttribute("noticeAddItem", name + "　賞味期限：" + sdf.format(expDate) + " を登録しました");
 		}
 
 
