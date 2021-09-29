@@ -38,4 +38,18 @@ public class IndexServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 文字化け防止
+
+		// 入力値の取得
+
+		// バリデーション
+
+		// アイテムの保存
+
+		// 画面表示
+		doGet(request, response);
+	}
+
 }
