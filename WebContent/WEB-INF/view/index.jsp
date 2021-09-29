@@ -1,4 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -37,31 +39,13 @@
       </tr>
     </thead>
     <tbody>
+      <c:forEach items="${list}" var="item">
       <tr>
-        <td>牛乳</td>
-        <td>2021年09月23日(木)</td>
+        <td><c:out value="${item.name}" /></td>
+        <td><fmt:formatDate value="${item.expDate}" pattern="y年MM月dd日(E)" /></td>
         <td><a href="" class="btn btn-danger">削除</a></td>
       </tr>
-      <tr>
-        <td>納豆</td>
-        <td>2021年09月25日(土)</td>
-        <td><a href="" class="btn btn-danger">削除</a></td>
-      </tr>
-      <tr>
-        <td>もずく</td>
-        <td>2021年09月27日(月)</td>
-        <td><a href="" class="btn btn-danger">削除</a></td>
-      </tr>
-      <tr>
-        <td>たまご</td>
-        <td>2021年09月28日(火)</td>
-        <td><a href="" class="btn btn-danger">削除</a></td>
-      </tr>
-      <tr>
-        <td>チーズ</td>
-        <td>2021年09月28日(火)</td>
-        <td><a href="" class="btn btn-danger">削除</a></td>
-      </tr>
+      </c:forEach>
     </tbody>
   </table>
 </div>
