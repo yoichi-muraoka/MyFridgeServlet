@@ -24,11 +24,8 @@ public class IndexServlet extends HttpServlet {
 		ItemService service = new ItemServiceImpl();
 		List<Item> list = service.getItemList();
 
-		for(Item item : list) {
-			System.out.print(item.getExpDate());
-			System.out.println(item.getName());
-		}
-
+		// リクエストスコープへの格納とフォワード
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 
