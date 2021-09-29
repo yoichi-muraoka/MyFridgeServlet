@@ -1,3 +1,4 @@
+<%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -22,7 +23,7 @@
     </div>
   </form>
 
-  <div class="my-5">  
+  <div class="my-5">
     <a class="btn btn-success active" href="" >全アイテム</a>
     <a class="btn btn-secondary" href="expired.html" >期限切れアイテム</a>
   </div>
