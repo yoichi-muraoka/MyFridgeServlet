@@ -41,9 +41,13 @@ public class IndexServlet extends HttpServlet {
 		List<Item> list;
 		if(sorted == null) {
 			list = service.getItemList();
+			// 削除操作用
+			request.getSession().removeAttribute("sorted");
 		}
 		else {
 			list = service.getExpiredList();
+			// 削除操作用
+			request.getSession().setAttribute("sorted", "expired");
 		}
 
 		// リクエストスコープへの格納とフォワード
