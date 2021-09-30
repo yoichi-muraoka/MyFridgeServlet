@@ -65,7 +65,7 @@
       <tr>
         <td><c:out value="${item.name}" /></td>
         <td><fmt:formatDate value="${item.expDate}" pattern="y年MM月dd日(E)" /></td>
-        <td><a href="" class="btn btn-danger">削除</a></td>
+        <td><a href="<%= request.getContextPath() %>/delete?id=<c:out value="${item.id}" />" class="btn btn-danger">削除</a></td>
       </tr>
       </c:forEach>
     </tbody>

@@ -38,11 +38,14 @@ public class ListTextConverter {
 			InputStream is = new FileInputStream("items.txt");
 			try(var br = new BufferedReader(new InputStreamReader(is))) {
 				String line;
+				int id = 0; // 削除用に追加
 				while((line = br.readLine()) != null) {
 					// 半角スペースを区切りとして配列に変換
 					String[] item = line.split(" ");
 					// 文字列の日付をDate型への変換しつつ、Listに追加
-					list.add(new Item(sdf.parse(item[0]), item[1]));
+					list.add(new Item(id, sdf.parse(item[0]), item[1]));
+					// 削除用id番号を加算
+					id++;
 				}
 			}
 			catch (ParseException e) {
