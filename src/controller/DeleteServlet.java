@@ -28,7 +28,10 @@ public class DeleteServlet extends HttpServlet {
 			service.deleteItem(id);
 		}
 
-		response.sendRedirect("index");
+		// 期限切れアイテム表示時のリダイレクトに対応
+		String sorted = (String) request.getSession().getAttribute("sorted");
+		String queryString = sorted != null ? "?sorted=" + sorted : "";
+		response.sendRedirect("index" + queryString);
 	}
 
 
