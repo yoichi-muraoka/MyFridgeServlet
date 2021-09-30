@@ -23,12 +23,21 @@ import service.ItemServiceImpl;
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 
+	private ItemService service;
+
+
+	@Override
+	public void init() throws ServletException {
+		service = new ItemServiceImpl();
+	}
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// GETパラメータの取得
 		String sorted = request.getParameter("sorted");
 
 		// GETパラメータに応じたアイテムリストの取得
-		ItemService service = new ItemServiceImpl();
+		service = new ItemServiceImpl();
 		List<Item> list;
 		if(sorted == null) {
 			list = service.getItemList();
@@ -85,8 +94,8 @@ public class IndexServlet extends HttpServlet {
 		if(isValidated) {
 			var sdf = new SimpleDateFormat("yyyy年MM月dd日(E)");
 			request.setAttribute("noticeAddItem", name + "　賞味期限：" + sdf.format(expDate) + " を登録しました");
+			service.addItem(new Item(expDate, name));
 		}
-
 
 		// 画面表示
 		doGet(request, response);
