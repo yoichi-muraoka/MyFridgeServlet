@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import service.ItemService;
-import service.ItemServiceImpl;
+import service.ServiceFactory;
 
 /**
  * Servlet implementation class DeleteServlet
@@ -24,7 +24,7 @@ public class DeleteServlet extends HttpServlet {
 		// 削除処理
 		if(strId != null) {
 			int id = Integer.parseInt(strId);
-			ItemService service = new ItemServiceImpl();
+			ItemService service = ServiceFactory.createItemService();
 			service.deleteItem(id);
 		}
 

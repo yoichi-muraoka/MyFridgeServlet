@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.Item;
 import service.ItemService;
-import service.ItemServiceImpl;
+import service.ServiceFactory;
 
 /**
  * Servlet implementation class IndexServlet
@@ -28,7 +28,7 @@ public class IndexServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		service = new ItemServiceImpl();
+		service = ServiceFactory.createItemService();
 	}
 
 
@@ -37,7 +37,6 @@ public class IndexServlet extends HttpServlet {
 		String sorted = request.getParameter("sorted");
 
 		// GETパラメータに応じたアイテムリストの取得
-		service = new ItemServiceImpl();
 		List<Item> list;
 		if(sorted == null) {
 			list = service.getItemList();
