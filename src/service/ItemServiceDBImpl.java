@@ -66,10 +66,21 @@ public class ItemServiceDBImpl implements ItemService {
 		return list;
 	}
 
+
+	/**
+	 * 賞味期限切れアイテムの一覧を取得
+	 */
 	@Override
 	public List<Item> getExpiredList() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		List<Item> list = new ArrayList<>();
+		try(var con = ds.getConnection()) {
+			String sql = "SELECT * FROM items WHERE exp_date < CURDATE() ORDER BY exp_date";
+			list = mapToList(con.prepareStatement(sql).executeQuery());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
