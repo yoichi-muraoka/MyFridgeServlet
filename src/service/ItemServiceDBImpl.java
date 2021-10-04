@@ -1,5 +1,9 @@
 package service;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -31,6 +35,19 @@ public class ItemServiceDBImpl implements ItemService {
 			throw new RuntimeException(e);
 		}
 		this.ds = ds;
+	}
+
+
+	// ResultSet ⇒ Listへの変換
+	private List<Item> mapToList(ResultSet rs) throws SQLException {
+		List<Item> list = new ArrayList<>();
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			Date expDate = rs.getDate("exp_date");
+			String name = rs.getString("name");
+			list.add(new Item(id, expDate, name));
+		}
+		return list;
 	}
 
 	@Override
