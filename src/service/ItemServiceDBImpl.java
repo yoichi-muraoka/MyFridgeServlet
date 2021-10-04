@@ -50,6 +50,12 @@ public class ItemServiceDBImpl implements ItemService {
 	}
 
 
+	// java.util.Date ⇒ java.sql.Dateへの変換
+	private java.sql.Date getSqlDate(java.util.Date date) {
+		return new java.sql.Date(date.getTime());
+	}
+
+
 	/**
 	 * 全アイテムを取得
 	 */
