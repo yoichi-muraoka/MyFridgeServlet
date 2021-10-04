@@ -37,7 +37,6 @@ public class ItemServiceDBImpl implements ItemService {
 		this.ds = ds;
 	}
 
-
 	// ResultSet ⇒ Listへの変換
 	private List<Item> mapToList(ResultSet rs) throws SQLException {
 		List<Item> list = new ArrayList<>();
@@ -50,10 +49,21 @@ public class ItemServiceDBImpl implements ItemService {
 		return list;
 	}
 
+
+	/**
+	 * 全アイテムを取得
+	 */
 	@Override
 	public List<Item> getItemList() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		List<Item> list = new ArrayList<>();
+		try (var con = ds.getConnection()) {
+			String sql = "SELECT * FROM items ORDER BY exp_date";
+			list = mapToList(con.prepareStatement(sql).executeQuery());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
