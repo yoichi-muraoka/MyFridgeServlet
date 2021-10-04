@@ -4,7 +4,7 @@ Tomcatの設定
 <Resource name="jdbc/myfridge_db"
  url="jdbc:mysql://127.0.0.1:3306/myfridge_db?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=JST"
  username="dbuser" password="dbpass"
- driverClassName="com.mysql.jdbc.Driver"
+ driverClassName="com.mysql.cj.jdbc.Driver"
  type="javax.sql.DataSource"
  initialSize="1" maxIdle="3" maxTotal="5"
  maxWaitMillis="5000" validationQuery="SELECT 1"/>
