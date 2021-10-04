@@ -89,10 +89,23 @@ public class ItemServiceDBImpl implements ItemService {
 		return list;
 	}
 
+
+	/**
+	 * アイテムを追加
+	 */
 	@Override
 	public void addItem(Item item) {
-		// TODO 自動生成されたメソッド・スタブ
-
+		try(var con = ds.getConnection()) {
+			String sql = "INSERT INTO items (exp_date, name) VALUES (?, ?)";
+			var stmt = con.prepareStatement(sql);
+			// setDate() では、java.sql.Dateを引数にする必要がある
+			stmt.setDate(1, getSqlDate(item.getExpDate()));
+			stmt.setString(2, item.getName());
+			stmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
