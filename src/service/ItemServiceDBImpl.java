@@ -108,10 +108,21 @@ public class ItemServiceDBImpl implements ItemService {
 		}
 	}
 
+
+	/**
+	 * アイテムを削除
+	 */
 	@Override
 	public void deleteItem(int index) {
-		// TODO 自動生成されたメソッド・スタブ
-
+		try(var con = ds.getConnection()) {
+			String sql = "DELETE FROM items WHERE id = ?";
+			var stmt = con.prepareStatement(sql);
+			stmt.setInt(1, index);
+			stmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
